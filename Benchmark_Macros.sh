@@ -1,23 +1,25 @@
-# All the command below are specific for HBase please change as needed for other clients/databases
+DB_HOST="server1"
 
-CHECK_IF_TABLE_EXISTS="exists 'usertable'"
+DB_PORT="6667"
 
-TRUNCATE_TABLE="truncate 'usertable'"
+CACHE_THRESHOLD="10000"
 
-CREATE_TABLE="n_splits=40; create 'usertable', 'cf', {SPLITS => (1..n_splits).map {|i| \"rhel#{10+i*(90-10)/n_splits}\"}}"
+CLI_PATH="/root/iotdb-cli-0.12.0-SNAPSHOT"
 
-CHECK_STATS_DB="status 'simple'"
+CLI_SHELL="xargs -i sh $CLI_PATH/sbin/start-cli.sh -h $DB_HOST -p $DB_PORT -u root -pw root -e '{}'"
 
-#COUNT_ROWS_IN_TABLE="count 'usertable', INTERVAL=>1000000"
+CHECK_IF_TABLE_EXISTS="Table IoTDB does exist"
 
-COUNT_ROWS_IN_TABLE="hbase org.apache.hadoop.hbase.mapreduce.RowCounter usertable"
+TRUNCATE_TABLE="echo 'delete storage group root.*' |  $CLI_SHELL"
 
-SUT_TABLE_PATH="/hbase/data/default/usertable/*/.regioninfo"
+CREATE_TABLE="There is no need to create table in IoTDB"
 
-ROW_COUNT="ROWS="
+CHECK_STATS_DB="echo 'show storage group' |  $CLI_SHELL"
 
-SUT_SHELL="hbase shell"
+COUNT_ROWS_IN_TABLE="echo 'flush;select count(*) from root group by level=0' | $CLI_SHELL"
 
-IOT_DATA_TABLE=usertable
+SUT_TABLE_PATH=""
 
-SUT_PARAMETERS="columnfamily=cf"
+SUT_SHELL="cat"
+
+SUT_PARAMETERS="iotdbinfo=$DB_HOST:$DB_PORT:$CACHE_THRESHOLD"

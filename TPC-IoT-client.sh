@@ -15,7 +15,7 @@ SUT_PARAMETERS=$9
 WORKLOAD=${10}
 LOGFILE_NAME=${11}
 
-mkdir -p ./logs
+mkdir -p $PWD/logs
 start=`date +%s%3N`
 
 
@@ -24,7 +24,7 @@ echo -e "${green} Running TPCx-IoT Benchmark Suite - Run $i - Epoch $start ${NC}
 echo -e "${green} TPCx-IoT Version ${version} ${NC}" | tee -a $PWD/logs/TPCx-IoT-result-"$prefix"-"$clientId-$LOGFILE_NAME$i".log
 echo -e "${green}$sep${NC}" | tee -a $PWD/logs/TPCx-IoT-result-"$prefix"-"$clientId-$LOGFILE_NAME$i".log
 echo "" | tee -a $PWD/logs/TPCx-IoT-result-"$prefix"-"$clientId-$LOGFILE_NAME$i".log
-echo -e "${green}Starting IoT Run $i output being return to $PWD/logs/IoT-run-time-$LOGFILE_NAME$i.txt ${NC}" | tee -a ./TPCx-IoT-result-"$prefix"-"$clientId-$LOGFILE_NAME$i".log
+echo -e "${green}Starting IoT Run $i output being return to $PWD/logs/IoT-run-time-$LOGFILE_NAME$i.txt ${NC}" | tee -a $PWD/logs/TPCx-IoT-result-"$prefix"-"$clientId-$LOGFILE_NAME$i".log
 echo "" | tee -a $PWD/logs/TPCx-IoT-result-"$prefix"-"$clientId-$LOGFILE_NAME$i".log
 
 # Command for running workload IoT based on the YCSB params
@@ -57,7 +57,7 @@ cat $PWD/logs/IoT-Workload-run-time-$LOGFILE_NAME$i-$clientId.txt >> $PWD/logs/T
 echo "" | tee -a $PWD/logs/TPCx-IoT-result-"$prefix"-"$clientId-$LOGFILE_NAME$i".log
 echo "" | tee -a $PWD/logs/TPCx-IoT-result-"$prefix"-"$clientId-$LOGFILE_NAME$i".log
 echo -e "${green}======== Workload IoT Run Result SUCCESS ========${NC}" | tee -a $PWD/logs/TPCx-IoT-result-"$prefix"-"$clientId-$LOGFILE_NAME$i".log
-echo -e "${green}======== Time taken by Workload IoT = `grep real $PWD/logs/IoT-Workload-run-time-$LOGFILE_NAME$i.txt | awk '{print $2}'`====${NC}" | tee -a $PWD/TPCx-IoT-result-"$prefix"-"$clientId-$LOGFILE_NAME$i".log
+echo -e "${green}======== Time taken by Workload IoT = `grep real $PWD/logs/IoT-Workload-run-time-$LOGFILE_NAME$i-$clientId.txt | awk '{print $2}'`====${NC}" | tee -a $PWD/logs/TPCx-IoT-result-"$prefix"-"$clientId-$LOGFILE_NAME$i".log
 echo "" | tee -a $PWD/logs/TPCx-IoT-result-"$prefix"-"$clientId-$LOGFILE_NAME$i".log
 echo "" | tee -a $PWD/logs/TPCx-IoT-result-"$prefix"-"$clientId-$LOGFILE_NAME$i".log
 end=`date +%s%3N`

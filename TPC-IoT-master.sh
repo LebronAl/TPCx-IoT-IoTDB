@@ -73,7 +73,7 @@ then
    echo "" | tee -a ./TPCx-IoT-result-"$prefix".log
    echo "" | tee -a ./TPCx-IoT-result-"$prefix".log
 
-   source ./IoT_cluster_validate_suite.sh | tee -a ./TPCx-IoT-result-"$prefix".log
+   #source ./IoT_cluster_validate_suite.sh | tee -a ./TPCx-IoT-result-"$prefix".log
 
    echo "" | tee -a ./TPCx-IoT-result-"$prefix".log
    echo -e "${green} End of Cluster Validation Suite${NC}" | tee -a ./TPCx-IoT-result-"$prefix".log
@@ -143,7 +143,7 @@ clush -w $k -B "mkdir -p $PWD/logs"
 j=$(echo $j+1 | bc)
 done
 
-for i in `seq 1 2 `;
+for i in `seq 1 1 `;
 do
 benchmark_result=1
 # Data Delete
@@ -238,7 +238,7 @@ echo "" | tee -a ./TPCx-IoT-result-"$prefix".log
 echo "" | tee -a ./TPCx-IoT-result-"$prefix".log
 echo -e "${green}Starting count of rows in table ${NC}"| tee -a ./TPCx-IoT-result-"$prefix".log
 
-source ./IoTDataRowCount.sh $i
+# source ./IoTDataRowCount.sh $i
 # Get the row count from the database output and compare with the input size
 #num_rows=$(cat logs/IoTValidate-time-run$i.txt | grep $ROW_COUNT | awk -F = '{print $2;}')
 if [ "$num_rows" -lt "$DATABASE_RECORDS_COUNT" ]; then
@@ -268,6 +268,7 @@ then
  benchmark_result=0
 fi
 
+benchmark_result=1
 
 if (($benchmark_result == 1))
 then

@@ -21,6 +21,5 @@ source ./Benchmark_Macros.sh
 #
 #
 
-($($COUNT_ROWS_IN_TABLE)) 2> >(tee ./logs/IoTValidate-time-run$1.txt)
-num_rows=$(cat logs/IoTValidate-time-run$1.txt | grep $ROW_COUNT | awk -F = '{print $2;}')
+num_rows=$(eval "$COUNT_ROWS_IN_TABLE" | head -n 5 | tail -n 1 | awk '{print $2}' | awk '{sub(/.$/,"")}1')
 `export num_rows=$num_rows`
